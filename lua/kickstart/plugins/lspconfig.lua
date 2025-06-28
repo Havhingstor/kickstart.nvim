@@ -272,6 +272,7 @@ return {
         bashls = {},
 
         phpactor = {},
+        -- mesonlsp = {},
       }
 
       -- Ensure the servers and tools above are installed
