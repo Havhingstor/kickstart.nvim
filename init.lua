@@ -175,6 +175,7 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror message' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -182,13 +183,13 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 --
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+vim.keymap.set('t', '<C-Space>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
+vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
+vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
+vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
@@ -204,6 +205,16 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
+
+-- Allow the opening '{' to be at other positions than the first column
+
+-- :map [[ ?{<CR>w99[{
+-- :map ][ /}<CR>b99]}
+-- :map ]] j0[[%/{<CR>
+-- :map [] k$][%?}<CR>
+
+vim.keymap.set({ 'n', 'v', 'o' }, '[[', '?{<CR>w99[{', { desc = 'Previous top level {' })
+vim.keymap.set({ 'n', 'v', 'o' }, ']]', 'j0?{<CR>w99[{%/{<CR>', { desc = 'Next top level {' })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -248,6 +259,19 @@ rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
+  {
+    'voldikss/vim-floaterm', -- Load Floaterm plugin and configure keybinds
+    config = function()
+      vim.keymap.set({ 'n', 'v', 'o' }, '<leader>-n', '<cmd>FloatermNew!<cr>', { desc = '[N]ew Floaterm' })
+      vim.keymap.set({ 'n', 'v', 'o' }, '<leader>-k', '<cmd>FloatermKill<cr>', { desc = '[K]ill Current Floaterm' })
+      vim.keymap.set({ 'n', 'v', 'o' }, '<leader>-K', '<cmd>FloatermKill!<cr>', { desc = '[K]ill All Floaterms' })
+      vim.keymap.set({ 'n', 'v', 'o' }, '<leader>-h', '<cmd>FloatermPrev<cr>', { desc = 'Previous Floaterm' })
+      vim.keymap.set({ 'n', 'v', 'o' }, '<leader>-H', '<cmd>FloatermFirst<cr>', { desc = 'First Floaterm' })
+      vim.keymap.set({ 'n', 'v', 'o' }, '<leader>-l', '<cmd>FloatermNext<cr>', { desc = 'Next Floaterm' })
+      vim.keymap.set({ 'n', 'v', 'o' }, '<leader>-L', '<cmd>FloatermLast<cr>', { desc = 'Last Floaterm' })
+      vim.keymap.set({ 'n', 'v', 'o' }, '<leader>-t', '<cmd>FloatermToggle<cr>', { desc = 'Toggle Floaterm' })
+    end,
+  },
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
@@ -407,11 +431,13 @@ require('lazy').setup({
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
+        defaults = {
+          mappings = {
+            i = {
+              ['<C-h>'] = 'which_key',
+            },
+          },
+        },
         -- pickers = {}
         extensions = {
           ['ui-select'] = {
@@ -543,6 +569,8 @@ require('lazy').setup({
           -- or a suggestion from your LSP for this to activate.
           map('gra', vim.lsp.buf.code_action, '[G]oto Code [A]ction', { 'n', 'x' })
 
+          map('K', vim.lsp.buf.hover, 'Show Documentation Overlay')
+
           -- Find references for the word under your cursor.
           map('grr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
 
@@ -670,11 +698,15 @@ require('lazy').setup({
       --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+
+      -- Sourcekit is not available in mason, we enable it here manually
+      vim.lsp.enable 'sourcekit'
+
       local servers = {
-        -- clangd = {},
+        clangd = {},
         -- gopls = {},
         -- pyright = {},
-        -- rust_analyzer = {},
+        rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -869,7 +901,7 @@ require('lazy').setup({
       -- the rust implementation via `'prefer_rust_with_warning'`
       --
       -- See :h blink-cmp-config-fuzzy for more information
-      fuzzy = { implementation = 'lua' },
+      fuzzy = { implementation = 'prefer_rust_with_warning' },
 
       -- Shows a signature help window while you type arguments for a function
       signature = { enabled = true },
@@ -944,7 +976,7 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'latex', 'swift' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
