@@ -699,13 +699,10 @@ require('lazy').setup({
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 
-      -- Sourcekit is not available in mason, we enable it here manually
-      vim.lsp.enable 'sourcekit'
-
       local servers = {
-        clangd = {},
+        -- clangd = {}, We don't need to install / handle manually since it's included in sourcekit
         -- gopls = {},
-        -- pyright = {},
+        pyright = {},
         rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -730,6 +727,8 @@ require('lazy').setup({
             },
           },
         },
+
+        harper_ls = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -765,6 +764,17 @@ require('lazy').setup({
           end,
         },
       }
+
+      -- Sourcekit is not available in mason, we enable it here manually
+      vim.lsp.enable 'sourcekit'
+
+      vim.lsp.config('harper_ls', {
+        settings = {
+          ['harper-ls'] = {
+            dialect = 'British',
+          },
+        },
+      })
     end,
   },
 
@@ -1005,12 +1015,12 @@ require('lazy').setup({
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
   --
-  -- require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.debug',
   -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
+  require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.neo-tree',
-  -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
