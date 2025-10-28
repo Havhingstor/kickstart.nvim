@@ -84,6 +84,8 @@ I hope you enjoy your Neovim journey,
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
 
+log = require 'log'
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -727,8 +729,6 @@ require('lazy').setup({
             },
           },
         },
-
-        harper_ls = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -749,7 +749,6 @@ require('lazy').setup({
         'stylua', -- Used to format Lua code
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
-
       require('mason-lspconfig').setup {
         ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
         automatic_installation = false,
@@ -768,10 +767,12 @@ require('lazy').setup({
       -- Sourcekit is not available in mason, we enable it here manually
       vim.lsp.enable 'sourcekit'
 
-      vim.lsp.config('harper_ls', {
+      vim.lsp.config('rust_analyzer', {
         settings = {
-          ['harper-ls'] = {
-            dialect = 'British',
+          ['rust-analyzer'] = {
+            check = {
+              command = 'clippy',
+            },
           },
         },
       })
