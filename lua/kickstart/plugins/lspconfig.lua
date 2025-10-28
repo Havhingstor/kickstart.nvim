@@ -219,15 +219,15 @@ return {
           -- clangd = {}, We don't need to install / handle manually since it's included in sourcekit
           -- gopls = {},
           pyright = {},
-          rust_analyzer = {
-            settings = {
-              ['rust-analyzer'] = {
-                check = {
-                  command = 'clippy',
-                },
-              },
-            },
-          },
+          -- rust_analyzer = {
+          --   settings = {
+          --     ['rust-analyzer'] = {
+          --       check = {
+          --         command = 'clippy',
+          --       },
+          --     },
+          --   },
+          -- },
           -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
           --
           -- Some languages (like typescript) have entire language plugins that can be useful:

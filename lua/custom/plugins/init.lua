@@ -19,4 +19,9 @@ return {
       vim.keymap.set({ 'n', 'v', 'o' }, '<leader>-t', '<cmd>FloatermToggle<cr>', { desc = 'Toggle Floaterm' })
     end,
   },
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^6', -- Recommended
+    lazy = false, -- This plugin is already lazy
+  },
 }
