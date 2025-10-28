@@ -81,6 +81,8 @@ return {
             vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
           end
 
+          map('K', vim.lsp.buf.hover, 'Show Documentation Overlay')
+
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
           map('grn', vim.lsp.buf.rename, '[R]e[n]ame')
@@ -214,10 +216,18 @@ return {
         --
         --  Feel free to add/remove any LSPs here that you want to install via Mason. They will automatically be installed and setup.
         mason = {
-          -- clangd = {},
+          -- clangd = {}, We don't need to install / handle manually since it's included in sourcekit
           -- gopls = {},
-          -- pyright = {},
-          -- rust_analyzer = {},
+          pyright = {},
+          rust_analyzer = {
+            settings = {
+              ['rust-analyzer'] = {
+                check = {
+                  command = 'clippy',
+                },
+              },
+            },
+          },
           -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
           --
           -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -240,11 +250,24 @@ return {
               },
             },
           },
+
+          harper_ls = {
+            settings = {
+              ['harper-ls'] = {
+                dialect = 'British',
+                linters = {
+                  SentenceCapitalization = false,
+                  SpellCheck = false,
+                },
+              },
+            },
+          },
         },
         -- This table contains config for all language servers that are *not* installed via Mason.
         -- Structure is identical to the mason table from above.
         others = {
           -- dartls = {},
+          sourcekit = {},
         },
       }
 
