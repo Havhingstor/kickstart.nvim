@@ -191,7 +191,7 @@ return {
       -- https://github.com/Saghen/blink.cmp/blob/102db2f5996a46818661845cf283484870b60450/plugin/blink-cmp.lua
       -- It has been left here as a comment for educational purposes (as the predecessor completion plugin required this explicit step).
       --
-      -- local capabilities = require("blink.cmp").get_lsp_capabilities()
+      local capabilities = require('blink.cmp').get_lsp_capabilities()
 
       -- Language servers can broadly be installed in the following ways:
       --  1) via the mason package manager; or
@@ -309,6 +309,22 @@ return {
       if not vim.tbl_isempty(servers.others) then
         vim.lsp.enable(vim.tbl_keys(servers.others))
       end
+
+      local opts = { noremap = true, silent = true }
+      local on_attach = function(_, bufnr)
+        opts.buffer = bufnr
+
+        opts.desc = 'Show line diagnostics'
+        vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, opts)
+
+        opts.desc = 'Show documentation for what is under cursor'
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+      end
+
+      vim.lsp.config('sourcekit', {
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
     end,
   },
 }
