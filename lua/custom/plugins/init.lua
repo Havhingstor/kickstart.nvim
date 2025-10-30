@@ -20,12 +20,6 @@ return {
     end,
   },
   {
-    'mrcjkb/rustaceanvim',
-    version = '^6', -- Recommended
-    lazy = false, -- This plugin is already lazy
-    config = function() require 'plugin-options.rust' end,
-  },
-  {
     'hedyhli/outline.nvim',
     lazy = true,
     cmd = { 'Outline', 'OutlineOpen' },

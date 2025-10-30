@@ -57,6 +57,7 @@ return {
           end
         end,
       })
+      vim.keymap.set('n', '<leader>l', function() require('lint').try_lint() end, { desc = '[L]int file' })
     end,
   },
 }

@@ -18,6 +18,7 @@
   "nvim-dap": { "branch": "master", "commit": "6782b097af2417a4c3e33849b0a26ae2188bd7ea" },
   "nvim-dap-go": { "branch": "main", "commit": "b4421153ead5d726603b02743ea40cf26a51ed5f" },
   "nvim-dap-ui": { "branch": "master", "commit": "cf91d5e2d07c72903d052f5207511bf7ecdb7122" },
+  "nvim-lint": { "branch": "master", "commit": "9da1fb942dd0668d5182f9c8dee801b9c190e2bb" },
   "nvim-lspconfig": { "branch": "master", "commit": "513fc3e2d1a041f2cf0a6379de2670ec586f4469" },
   "nvim-nio": { "branch": "master", "commit": "21f5324bfac14e22ba26553caf69ec76ae8a7662" },
   "nvim-treesitter": { "branch": "master", "commit": "42fc28ba918343ebfd5565147a42a26580579482" },
@@ -31,5 +32,5 @@
   "todo-comments.nvim": { "branch": "main", "commit": "411503d3bedeff88484de572f2509c248e499b38" },
   "tokyonight.nvim": { "branch": "main", "commit": "2642dbb83333e0575d1c3436e1d837926871c5fb" },
   "vim-floaterm": { "branch": "master", "commit": "a720490bd9dc02c5492e800aa08d4802f22b01f8" },
-  "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" }
+  "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" },
 }
