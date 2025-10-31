@@ -33,7 +33,25 @@ return {
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP.
-      { 'j-hui/fidget.nvim', opts = {} },
+      {
+        'j-hui/fidget.nvim',
+        opts = {
+          notification = {
+            window = {
+              normal_hl = 'String', -- Base highlight group in the notification window
+              winblend = 0, -- Background color opacity in the notification window
+              border = 'rounded', -- Border around the notification window
+              zindex = 45, -- Stacking priority of the notification window
+              max_width = 0, -- Maximum width of the notification window
+              max_height = 0, -- Maximum height of the notification window
+              x_padding = 1, -- Padding from right edge of window boundary
+              y_padding = 1, -- Padding from bottom edge of window boundary
+              align = 'bottom', -- How to align the notification window
+              relative = 'editor', -- What the notification window position is relative to
+            },
+          },
+        },
+      },
 
       -- Allows extra capabilities provided by blink.cmp
       'saghen/blink.cmp',
@@ -191,7 +209,7 @@ return {
       -- https://github.com/Saghen/blink.cmp/blob/102db2f5996a46818661845cf283484870b60450/plugin/blink-cmp.lua
       -- It has been left here as a comment for educational purposes (as the predecessor completion plugin required this explicit step).
       --
-      local capabilities = require('blink.cmp').get_lsp_capabilities()
+      -- local capabilities = require('blink.cmp').get_lsp_capabilities()
 
       -- Language servers can broadly be installed in the following ways:
       --  1) via the mason package manager; or
@@ -267,7 +285,9 @@ return {
         -- Structure is identical to the mason table from above.
         others = {
           -- dartls = {},
-          sourcekit = {},
+          sourcekit = {
+            cmd = { vim.trim(vim.fn.system 'xcrun -f sourcekit-lsp') },
+          },
         },
       }
 
@@ -310,21 +330,6 @@ return {
         vim.lsp.enable(vim.tbl_keys(servers.others))
       end
 
-      local opts = { noremap = true, silent = true }
-      local on_attach = function(_, bufnr)
-        opts.buffer = bufnr
-
-        opts.desc = 'Show line diagnostics'
-        vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, opts)
-
-        opts.desc = 'Show documentation for what is under cursor'
-        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-      end
-
-      vim.lsp.config('sourcekit', {
-        capabilities = capabilities,
-        on_attach = on_attach,
-      })
     end,
   },
 }
