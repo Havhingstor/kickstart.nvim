@@ -234,18 +234,8 @@ return {
         --
         --  Feel free to add/remove any LSPs here that you want to install via Mason. They will automatically be installed and setup.
         mason = {
-          -- clangd = {}, We don't need to install / handle manually since it's included in sourcekit
           -- gopls = {},
           pyright = {},
-          -- rust_analyzer = {
-          --   settings = {
-          --     ['rust-analyzer'] = {
-          --       check = {
-          --         command = 'clippy',
-          --       },
-          --     },
-          --   },
-          -- },
           -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
           --
           -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -329,7 +319,6 @@ return {
       if not vim.tbl_isempty(servers.others) then
         vim.lsp.enable(vim.tbl_keys(servers.others))
       end
-
     end,
   },
 }
