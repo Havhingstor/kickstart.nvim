@@ -120,6 +120,7 @@ return {
         -- 'delve',
         'python',
         'codelldb',
+        'javadbg',
       },
     }
 

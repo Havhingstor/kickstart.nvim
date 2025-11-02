@@ -30,5 +30,10 @@ return {
       -- Your setup opts here
     },
   },
-  'mfussenegger/nvim-jdtls',
+  {
+    'mfussenegger/nvim-jdtls',
+    dependencies = {
+      'nvim-dap',
+    },
+  },
 }
