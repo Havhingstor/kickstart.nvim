@@ -30,4 +30,5 @@ return {
       -- Your setup opts here
     },
   },
+  'mfussenegger/nvim-jdtls',
 }
