@@ -36,4 +36,18 @@ return {
       'nvim-dap',
     },
   },
+  {
+    'oclay1st/gradle.nvim',
+    cmd = { 'Gradle', 'GradleExec', 'GradleInit', 'GradleFavorites' },
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'MunifTanjim/nui.nvim',
+    },
+    opts = {}, -- options, see default configuration
+    keys = {
+      { '<leader>g', desc = '+Gradle', mode = { 'n', 'v' } },
+      { '<leader>gg', '<cmd>Gradle<cr>', desc = 'Gradle Projects' },
+      { '<leader>gf', '<cmd>GradleFavorites<cr>', desc = 'Gradle Favorite Commands' },
+    },
+  },
 }

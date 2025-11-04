@@ -226,8 +226,6 @@ return {
         vim.fn.glob(vim.fn.stdpath 'data' .. '/mason/packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar', 1),
       }
 
-      require('log'):write(bundles)
-
       -- The servers table comprises of the following sub-tables:
       -- 1. mason
       -- 2. others
