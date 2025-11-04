@@ -319,6 +319,7 @@ return {
               bundles = bundles,
             },
           },
+          texlab = {},
         },
       }
 

@@ -16,7 +16,7 @@ return {
       vim.keymap.set({ 'n', 'v', 'o' }, '<leader>-H', '<cmd>FloatermFirst<cr>', { desc = 'First Floaterm' })
       vim.keymap.set({ 'n', 'v', 'o' }, '<leader>-l', '<cmd>FloatermNext<cr>', { desc = 'Next Floaterm' })
       vim.keymap.set({ 'n', 'v', 'o' }, '<leader>-L', '<cmd>FloatermLast<cr>', { desc = 'Last Floaterm' })
-      vim.keymap.set({ 'n', 'v', 'o' }, '<leader>-t', '<cmd>FloatermToggle<cr>', { desc = 'Toggle Floaterm' })
+      vim.keymap.set({ 'n', 'v', 'o' }, '<leader>-<leader>', '<cmd>FloatermToggle<cr>', { desc = 'Toggle Floaterm' })
     end,
   },
   {
