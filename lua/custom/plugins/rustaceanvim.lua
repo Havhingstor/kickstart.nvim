@@ -48,6 +48,9 @@ return {
         dap = {
           adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
         },
+        tools = {
+          enable_clippy = true
+        },
       }
     end
   end,

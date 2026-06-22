@@ -78,6 +78,14 @@ vim.o.confirm = true
 -- Disable line wrapping
 vim.o.wrap = false
 
+-- Enable line wrapping if required
+-- vim.o.wrap = true
+-- vim.opt.linebreak = true
+-- vim.opt.showbreak = '↪'
+-- vim.opt.textwidth = 0
+-- vim.opt.sidescroll = 1
+-- vim.opt.sidescrolloff = 10
+
 -- Highlight max chars per line
 -- vim.o.colorcolumn = '120'
 
