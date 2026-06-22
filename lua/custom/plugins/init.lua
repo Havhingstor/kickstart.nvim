@@ -50,4 +50,7 @@ return {
       { '<leader>gf', '<cmd>GradleFavorites<cr>', desc = 'Gradle Favorite Commands' },
     },
   },
+  {
+    'mg979/vim-visual-multi',
+  }
 }
