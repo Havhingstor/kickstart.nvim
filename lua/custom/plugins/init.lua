@@ -52,5 +52,14 @@ return {
   },
   {
     'mg979/vim-visual-multi',
-  }
+    config = function()
+      vim.g.VM_maps = {
+        ['Find Under'] = '<C-n>',
+        ['Find Subword Under'] = '<C-n>',
+        -- navigation inside VM mode (safe)
+        ['Goto Next'] = '<C-ä>',
+        ['Goto Prev'] = '<C-ö>',
+      }
+    end,
+  },
 }

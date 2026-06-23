@@ -270,6 +270,7 @@ return {
           },
 
           harper_ls = {
+            filetypes = { 'markdown', 'text', 'gitcommit' },
             settings = {
               ['harper-ls'] = {
                 dialect = 'British',
