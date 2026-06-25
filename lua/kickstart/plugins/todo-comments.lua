@@ -7,7 +7,7 @@ return {
     ---@module 'todo-comments'
     ---@type TodoOptions
     ---@diagnostic disable-next-line: missing-fields
-    opts = { signs = false },
+    opts = { signs = true },
   },
 }
 -- vim: ts=2 sts=2 sw=2 et

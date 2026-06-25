@@ -13,8 +13,10 @@ return {
       nvim_treesitter.install {
         'bash',
         'c',
+        'cpp',
         'diff',
         'html',
+        'javascript',
         'lua',
         'luadoc',
         'markdown',
@@ -25,6 +27,8 @@ return {
         'latex',
         'swift',
         'xml',
+        'csv',
+        'json',
         'java',
         'gitignore',
         'gitcommit',
@@ -32,12 +36,7 @@ return {
 
       -- Enable Neovim's built-in highlighting and indentation
       vim.api.nvim_create_autocmd('FileType', {
-        callback = function()
-          pcall(vim.treesitter.start)
-          if vim.treesitter.language.get_lang(vim.bo.filetype) then
-            vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-          end
-        end,
+        callback = function() pcall(vim.treesitter.start) end,
       })
     end,
   },

@@ -89,4 +89,8 @@ vim.o.wrap = false
 -- Highlight max chars per line
 vim.o.colorcolumn = '120'
 
+vim.bo.autoindent = true
+vim.bo.smartindent = true
+vim.bo.expandtab = true
+
 -- vim: ts=2 sts=2 sw=2 et

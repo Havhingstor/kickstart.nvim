@@ -270,13 +270,14 @@ return {
           },
 
           harper_ls = {
-            filetypes = { 'markdown', 'text', 'gitcommit' },
             settings = {
               ['harper-ls'] = {
                 dialect = 'British',
                 linters = {
                   SentenceCapitalization = false,
                   SpellCheck = false,
+
+                  ToDoHyphen = false,
                 },
               },
             },
