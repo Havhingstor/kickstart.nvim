@@ -87,7 +87,19 @@ vim.o.wrap = false
 -- vim.opt.sidescrolloff = 10
 
 -- Highlight max chars per line
-vim.o.colorcolumn = '120'
+vim.opt.textwidth = 120
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = '*',
+  callback = function()
+    local tw = vim.bo.textwidth
+    if tw > 0 then
+      vim.opt_local.colorcolumn = tostring(tw)
+    else
+      vim.opt_local.colorcolumn = '80'
+    end
+  end,
+})
 
 vim.bo.autoindent = true
 vim.bo.smartindent = true

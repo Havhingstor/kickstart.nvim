@@ -32,6 +32,7 @@ return {
         'java',
         'gitignore',
         'gitcommit',
+        'python',
       }
 
       -- Enable Neovim's built-in highlighting and indentation
