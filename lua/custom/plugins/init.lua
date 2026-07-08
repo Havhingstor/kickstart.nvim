@@ -63,4 +63,5 @@ return {
     end,
   },
   { 'lukas-reineke/virt-column.nvim', opts = {}, config = function() require('virt-column').setup() end },
+  { 'wakatime/vim-wakatime', lazy = false },
 }
