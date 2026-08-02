@@ -30,8 +30,8 @@ return {
         },
         opts = {
           history = true,
-          region_check_events = 'InsertEnter',
-          delete_check_events = 'TextChanged',
+          region_check_events = { 'CursorMoved', 'CursorMovedI', 'InsertEnter' },
+          delete_check_events = { 'TextChanged', 'TextChangedI' },
         },
       },
       'folke/lazydev.nvim',
