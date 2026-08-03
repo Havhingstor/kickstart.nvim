@@ -3,6 +3,7 @@
 return {
   'mrcjkb/rustaceanvim',
   version = '^9', -- Recommended
+  branch = 'main',
   lazy = false, -- This plugin is already lazy
   config = function()
     vim.g.rustaceanvim = function()
