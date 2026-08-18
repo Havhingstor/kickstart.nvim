@@ -64,4 +64,12 @@ return {
   },
   { 'lukas-reineke/virt-column.nvim', opts = {}, config = function() require('virt-column').setup() end },
   { 'wakatime/vim-wakatime', lazy = false },
+  {
+    'lmgraf/wsl-clipboard.nvim',
+    config = function()
+      require('wsl-clipboard').setup {
+        mode = 'sync', -- options: "system", "sync", "focus"
+      }
+    end,
+  },
 }

@@ -15,7 +15,7 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagn
 --
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<C-<>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+vim.keymap.set('t', '<C-y>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- Close current buffer
 vim.keymap.set('n', '<leader>Q', ':bd<CR>', { desc = 'Close current buffer' })
