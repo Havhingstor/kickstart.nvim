@@ -101,6 +101,41 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
+local ns = vim.api.nvim_create_namespace 'gitcommit_overflow'
+
+vim.api.nvim_set_hl(0, 'GitCommitOverflow', {
+  bg = '#804000',
+})
+
+local function update_overflow(buf)
+  vim.api.nvim_buf_clear_namespace(buf, ns, 0, 1)
+
+  local line = vim.api.nvim_buf_get_lines(buf, 0, 1, false)[1]
+  if not line or #line <= 50 then
+    return
+  end
+
+  vim.api.nvim_buf_set_extmark(buf, ns, 0, 50, {
+    end_col = #line,
+    hl_group = 'GitCommitOverflow',
+    priority = 200,
+  })
+end
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'gitcommit',
+  callback = function(ev)
+    local buf = ev.buf
+
+    update_overflow(buf)
+
+    vim.api.nvim_create_autocmd({ 'TextChanged', 'TextChangedI' }, {
+      buffer = buf,
+      callback = function() update_overflow(buf) end,
+    })
+  end,
+})
+
 vim.bo.autoindent = true
 vim.bo.smartindent = true
 vim.bo.expandtab = true
