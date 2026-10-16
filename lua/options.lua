@@ -78,6 +78,9 @@ vim.o.confirm = true
 -- Disable line wrapping
 vim.o.wrap = false
 
+vim.o.foldmethod = 'indent'
+vim.o.foldlevelstart = 99
+
 -- Enable line wrapping if required
 -- vim.o.wrap = true
 -- vim.opt.linebreak = true
