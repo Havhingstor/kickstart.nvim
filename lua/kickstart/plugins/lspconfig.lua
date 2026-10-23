@@ -290,7 +290,9 @@ return {
           -- dartls = {},
           sourcekit = {
             cmd = { vim.trim(vim.fn.system 'xcrun -f sourcekit-lsp') },
+            filetypes = { 'swift', 'objc', 'objcpp' },
           },
+          clangd = {},
           jdtls = {
             -- `cmd` defines the executable to launch eclipse.jdt.ls.
             -- `jdtls` must be available in $PATH and you must have Python3.9 for this to work.
