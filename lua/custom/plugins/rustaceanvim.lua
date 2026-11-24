@@ -45,6 +45,13 @@ return {
 
             require 'custom.plugins.util.rust-keymaps-runner'
           end,
+          default_settings = {
+            ['rust-analyzer'] = {
+              cargo = {
+                allFeatures = true,
+              },
+            },
+          },
         },
         dap = {
           adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),

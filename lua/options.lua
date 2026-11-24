@@ -93,6 +93,11 @@ vim.o.foldlevelstart = 99
 vim.opt.textwidth = 120
 
 vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'markdown',
+  callback = function() vim.opt.textwidth = 80 end,
+})
+
+vim.api.nvim_create_autocmd('FileType', {
   pattern = '*',
   callback = function()
     local tw = vim.bo.textwidth
